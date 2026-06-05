@@ -1,4 +1,4 @@
-# spronksy.github.io-alephtav
+# spronksy.github.io/alephtav
 
 Aleph Tav · אֵת
 
