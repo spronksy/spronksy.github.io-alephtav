@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Hebrew Letters</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --p:#F5F0E8;
+  --p2:#EDE7D9;
+  --p3:#E3DBCA;
+  --ink:#1C1812;
+  --ink2:#3D3628;
+  --ink3:#6B5F4E;
+  --gold:#8B6914;
+  --gold2:#C49A27;
+  --gold-lt:#F0E4B8;
+  --rule:rgba(139,105,20,0.22);
+  --max:480px;
+}
+html{background:#D8CDB8}
+body{
+  background:var(--p);
+  color:var(--ink);
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:17px;
+  line-height:1.7;
+  max-width:var(--max);
+  margin:0 auto;
+  min-height:100vh;
+  box-shadow:0 0 60px rgba(0,0,0,0.18);
+}
+#root{width:100%}
+
+/* HEADER */
+.hdr{
+  text-align:center;
+  padding:2rem 1.25rem 1.5rem;
+  background:var(--p2);
+  border-bottom:1px solid var(--rule);
+  position:relative;
+}
+.hdr::after{
+  content:'';
+  display:block;
+  width:40px;height:1px;
+  background:var(--gold);
+  margin:1rem auto 0;
+}
+.hdr-title{
+  font-family:'IM Fell English',serif;
+  font-size:2rem;
+  color:var(--ink);
+  letter-spacing:0.02em;
+  line-height:1.2;
+}
+.hdr-heb{
+  font-size:1.6rem;
+  direction:rtl;
+  color:var(--gold);
+  margin-top:4px;
+  letter-spacing:0.1em;
+}
+.hdr-sub{
+  font-size:0.75rem;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--ink3);
+  margin-top:10px;
+}
+.hdr-intro{
+  font-size:0.95rem;
+  color:var(--ink2);
+  margin-top:0.75rem;
+  font-style:italic;
+  line-height:1.65;
+  max-width:340px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* FILTERS */
+.filters{
+  display:flex;gap:7px;
+  padding:0.75rem 1rem;
+  background:var(--p2);
+  border-bottom:1px solid var(--rule);
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.filters::-webkit-scrollbar{display:none}
+.ftag{
+  font-size:0.72rem;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  padding:5px 14px;
+  border-radius:20px;
+  border:1px solid var(--rule);
+  background:transparent;
+  color:var(--ink3);
+  cursor:pointer;
+  white-space:nowrap;
+  font-family:'Cormorant Garamond',serif;
+  transition:all 0.15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.ftag.on{background:var(--gold);color:#fff;border-color:var(--gold)}
+.ftag:active{opacity:0.8}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:var(--rule);
+}
+.lcard{
+  background:var(--p);
+  padding:1rem 0.5rem 0.85rem;
+  cursor:pointer;
+  text-align:center;
+  transition:background 0.12s;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
+}
+.lcard:hover,.lcard:active{background:var(--gold-lt)}
+.lc{font-size:2.4rem;line-height:1.1;color:var(--ink);direction:rtl}
+.ln{font-size:0.68rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink3);margin-top:4px}
+.lv{font-size:0.65rem;color:var(--gold);margin-top:2px}
+
+/* DETAIL */
+.back{
+  display:flex;align-items:center;gap:6px;
+  width:100%;padding:0.85rem 1.25rem;
+  font-size:0.9rem;color:var(--gold);
+  cursor:pointer;background:var(--p2);
+  border:none;border-bottom:1px solid var(--rule);
+  text-align:left;font-family:'Cormorant Garamond',serif;
+  -webkit-tap-highlight-color:transparent;
+}
+.back:active{opacity:0.7}
+.dhero{
+  text-align:center;
+  padding:2rem 1.25rem 1.5rem;
+  background:var(--p2);
+  border-bottom:1px solid var(--rule);
+}
+.dheb{font-size:5.5rem;line-height:1;color:var(--ink);direction:rtl}
+.dname{
+  font-family:'IM Fell English',serif;
+  font-size:1.7rem;color:var(--ink);margin-top:8px;
+}
+.dtrans{font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);margin-top:4px}
+.badges{display:flex;justify-content:center;gap:7px;margin-top:12px;flex-wrap:wrap}
+.bdg{
+  font-size:0.7rem;padding:3px 11px;
+  border-radius:20px;
+  border:1px solid var(--rule);
+  color:var(--ink3);background:var(--p);
+}
+.bdg.hi{background:var(--gold-lt);color:var(--gold);border-color:var(--gold2)}
+
+/* SECTIONS */
+.secs{padding:0 1.25rem 3rem}
+.sec{border-bottom:1px solid var(--rule);padding:1.3rem 0}
+.sec:last-child{border-bottom:none}
+.slbl{
+  font-size:0.68rem;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--gold);
+  margin-bottom:0.6rem;font-weight:500;
+}
+.mheb{font-size:1.9rem;direction:rtl;color:var(--ink);margin-bottom:6px}
+.mbreak{display:flex;gap:8px;flex-wrap:wrap;margin-top:0.6rem}
+.mltr{
+  background:var(--p2);
+  border:1px solid var(--rule);
+  border-radius:8px;
+  padding:0.55rem 0.7rem;
+  text-align:center;
+  min-width:72px;
+}
+.mlheb{font-size:1.35rem;direction:rtl;color:var(--ink)}
+.mlname{font-size:0.67rem;color:var(--ink3);margin-top:2px;text-transform:uppercase;letter-spacing:0.06em}
+.mlmean{font-size:0.72rem;color:var(--gold);margin-top:3px;font-style:italic}
+.opblk{
+  border-left:3px solid var(--gold);
+  padding:0.8rem 1rem;
+  border-radius:0 8px 8px 0;
+  margin:0.6rem 0;
+  background:var(--p2);
+}
+.oplbl{font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.txt{font-size:1rem;color:var(--ink2);line-height:1.8}
+.apblk{
+  background:var(--gold-lt);
+  border:1px solid rgba(196,154,39,0.35);
+  border-radius:10px;
+  padding:1rem 1.1rem;
+  margin-top:0.6rem;
+}
+.aplbl{font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.ref{
+  font-style:italic;
+  color:var(--ink2);
+  font-size:0.97rem;
+  line-height:1.75;
+  border-top:1px solid var(--rule);
+  padding-top:1rem;
+  margin-top:0.75rem;
+}
+.ref::before{content:'↯  ';color:var(--gold)}
+
+/* FOOTER */
+.foot{
+  text-align:center;
+  padding:1.5rem 1rem;
+  border-top:1px solid var(--rule);
+  background:var(--p2);
+}
+.foot p{font-size:0.8rem;color:var(--ink3);font-style:italic}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+const LL=[
+{h:"א",n:"Aleph",t:"Aleph · Lamed · Peh",m:"אָלֶף",v:1,g:"Mother",el:"Air",as:"Primordial",
+ml:[{h:"א",n:"Aleph",d:"Unity / silence / the ox"},{h:"ל",n:"Lamed",d:"Learning / aspiration / the goad"},{h:"פ",n:"Peh",d:"Mouth / speech / creative word"}],
+op:"Aleph–Lamed–Peh maps the arc of all transformation: Unity (Aleph) reaches through aspiration (Lamed) and arrives as spoken reality (Peh). From undivided potential → learning → expression. This is the master sequence underlying every creative act.",
+kb:"Aleph corresponds to Ein Sof — the infinite without limit. Its form reveals cosmology: two Yods (upper = hidden divine, lower = Shekhinah) connected by a diagonal Vav (the human being as bridge). Aleph is the tzimtzum's residue — the reshimu, the divine trace left after contraction made room for creation. Value 1 is not the first of a sequence but the undivided Oneness before counting begins.",
+ap:"When you feel fragmented, Aleph invites you back to the point before division. Begin any project by touching the unity beneath it — what single intention holds everything? In relationships: what is the one thing that, if held, would make everything else coherent?",
+rf:"Where are you being called to stop speaking and simply be the presence that holds the space?",
+to:"Aleph first appears hidden inside bara (בָּרָא) — created — the second word of Torah. The silent one is always already inside the act of creation."},
+
+{h:"ב",n:"Bet",t:"Bet · Yod · Tav",m:"בֵּית",v:2,g:"Double",el:"Saturn/Shabbat",as:"Saturn",
+ml:[{h:"ב",n:"Bet",d:"House / container / blessing"},{h:"י",n:"Yod",d:"Divine spark / hand / point"},{h:"ת",n:"Tav",d:"Seal / truth / completion"}],
+op:"Bet–Yod–Tav: A house (Bet) is built when the divine spark (Yod) arrives at completion (Tav). The transformation operator is incarnation — the infinite point descending into a bounded dwelling. Container → presence → seal.",
+kb:"Bet opens Torah because creation itself is the construction of a house for divine presence. The Zohar teaches God looked into Torah and created the world — Bet is the blueprint. Its form opens toward Aleph (the infinite) and closes on three sides: divinity contained in form.",
+ap:"Ask of any structure: is this a true house — does it invite the divine spark in? Apply to your creative work, your business model, your daily rhythm. What you build becomes the house your soul lives in.",
+rf:"What are you building right now, and is the divine spark welcome inside it?",
+to:"Torah begins Bereshit (בְּרֵאשִׁית) — In a house of beginning. The Bet is written large in the original scroll: everything that follows lives inside this one container."},
+
+{h:"ג",n:"Gimel",t:"Gimel · Mem · Lamed",m:"גִּימֶל",v:3,g:"Simple",el:"Jupiter",as:"Jupiter",
+ml:[{h:"ג",n:"Gimel",d:"Camel / generosity / movement"},{h:"מ",n:"Mem",d:"Water / flowing / hidden depths"},{h:"ל",n:"Lamed",d:"Learning / reaching / the goad"}],
+op:"Gimel–Mem–Lamed: The generous one (Gimel) carries water (Mem) toward learning (Lamed). The transformation operator is bestowal through motion — abundance moves. The camel carries water to those who cannot reach the well.",
+kb:"Gimel faces toward Dalet — the Talmud says Gimel runs toward the poor. Jupiter's energy: abundance that multiplies by moving. Gimel connects to gemul (גְּמוּל) — consequence of action, karma in its truest form.",
+ap:"Map your resources — time, knowledge, attention. What are you carrying that someone else needs? Your product is a camel: what does it carry across the desert for someone who cannot make that crossing alone?",
+rf:"What are you carrying that you haven't yet given — and what would it mean to release it forward?",
+to:"Gimel appears in g'dolim (גְּדֹלִים) — the great luminaries of Genesis 1:16. Greatness in Torah is always measured by what light you carry to others."},
+
+{h:"ד",n:"Dalet",t:"Dalet · Lamed · Tav",m:"דָּלֶת",v:4,g:"Simple",el:"Mars",as:"Mars/Venus",
+ml:[{h:"ד",n:"Dalet",d:"Door / poverty / receptivity"},{h:"ל",n:"Lamed",d:"Learning / aspiration"},{h:"ת",n:"Tav",d:"Seal / completion / truth"}],
+op:"Dalet–Lamed–Tav: The threshold (Dalet) is entered through aspiration (Lamed) and sealed in truth (Tav). The transformation operator is receptive emptiness — you cannot receive what you are too full to hold.",
+kb:"Dalet and Gimel are paired — the poor one and the generous one facing each other. The Talmud teaches Dalet turns its face away from Gimel in the receiving, to preserve dignity. Four is the number of the material world — four directions, four elements, four letters of the divine Name.",
+ap:"Where are you refusing to receive because receiving feels like weakness? Dalet invites radical openness — to help, to love, to new information. What door requires you to arrive empty-handed?",
+rf:"What would you have to admit you don't know in order to cross this threshold?",
+to:"Dalet appears in Echad (אֶחָד), One — from the Shema. The Dalet is written large in the Torah scroll, holding the final note of unity's declaration."},
+
+{h:"ה",n:"Heh",t:"Heh · Aleph",m:"הֵא",v:5,g:"Simple",el:"Aries",as:"Aries",
+ml:[{h:"ה",n:"Heh",d:"Window / breath / divine presence"},{h:"א",n:"Aleph",d:"Unity / silence / the ox"}],
+op:"Heh–Aleph: The window (Heh) opens onto unity (Aleph). Two operators: manifestation and source. A window doesn't create light; it allows light through. Your job is not to generate; it is to open.",
+kb:"Heh appears twice in YHVH. The first Heh is Binah (understanding); the final Heh is Malkuth (manifestation). Heh is the letter of divine breath. Five is the number of Torah's books, the human hand, the five levels of soul.",
+ap:"Where are you blocking the light rather than being a window? Create apertures in your day — silence between words — so what wants to come through can arrive.",
+rf:"What would you have to stop doing to become a clearer window for what wants to move through you?",
+to:"Heh is added to Abram to make Abraham, and to Sarai to make Sarah — the divine breath is literally inserted into human identity at the moment of covenant."},
+
+{h:"ו",n:"Vav",t:"Vav · Vav",m:"וָו",v:6,g:"Simple",el:"Taurus",as:"Taurus",
+ml:[{h:"ו",n:"Vav",d:"Hook / nail / connector"},{h:"ו",n:"Vav",d:"Hook / nail / connector"}],
+op:"Vav–Vav: The connector connecting to itself — pure relational principle. When a Milui contains only itself repeated, the teaching is: this force IS its own operation. Connection connects. The transformation operator is pure conjunction: and, and, and.",
+kb:"Vav is the letter of 'and' (ו) in Hebrew — it appears at the start of nearly every narrative verse in Torah. Six is the number of days of creation, the Star of David's points, the six directions of space. Vav is the nail that holds the Mishkan together.",
+ap:"Wherever there is disconnection — between your values and actions, between people, between your inner knowing and outer expression — Vav asks: what is the specific nail that would hold these two things together?",
+rf:"What two things in your life are almost connected but need one nail to hold them in place?",
+to:"Exodus begins with Vav — Ve'eleh shemot (וְאֵלֶּה שְׁמוֹת). The Vav connects the story of Genesis directly to liberation — nothing is separate."},
+
+{h:"ז",n:"Zayin",t:"Zayin · Yod · Nun",m:"זַיִן",v:7,g:"Simple",el:"Gemini",as:"Gemini",
+ml:[{h:"ז",n:"Zayin",d:"Sword / sustenance / to cut"},{h:"י",n:"Yod",d:"Divine spark / hand / point"},{h:"נ",n:"Nun",d:"Fish / faithful continuity"}],
+op:"Zayin–Yod–Nun: The sword (Zayin) guided by the divine hand (Yod) in faithful service (Nun). The transformation operator is discernment in service of nourishment — the same blade that cuts grain sustains life.",
+kb:"Seven is the number of Shabbat — the crown. Zayin's form is a Vav with a crown: the ordinary connector elevated by rest. The Talmud teaches zayin (זָן) also means to nourish — sword and sustenance share a root.",
+ap:"What are you continuing that needs to be cut? And what are you cutting that is actually sustaining you? Zayin's practice is the intentional pause — before your next creation, name what you release from the last cycle.",
+rf:"What would become possible if you stopped one thing completely and let it be Shabbat for that part of your life?",
+to:"Zayin appears in zachor (זָכוֹר) — remember. The Shabbat commandment begins: remember the Sabbath day to keep it holy."},
+
+{h:"ח",n:"Chet",t:"Chet · Yod · Tav",m:"חֵית",v:8,g:"Simple",el:"Cancer",as:"Cancer",
+ml:[{h:"ח",n:"Chet",d:"Fence / enclosure / life"},{h:"י",n:"Yod",d:"Divine spark / hand / point"},{h:"ת",n:"Tav",d:"Seal / truth / completion"}],
+op:"Chet–Yod–Tav: The sacred enclosure (Chet) holds the divine spark (Yod) until sealed in truth (Tav). The transformation operator is consecration through boundary — the fence doesn't limit life; it defines where life is protected enough to flourish.",
+kb:"Chet is the root of Chaim — life. Eight transcends the seven-cycle into the transcendent octave. Chet's form shows two Zayins joined at the top — the tension between two forces held in sacred union.",
+ap:"What sacred enclosures are you maintaining — times, spaces, practices that are set apart? What would you need to fence in for your most vital work to thrive?",
+rf:"What life-force in you needs a protected enclosure right now — not to be hidden, but to be allowed to grow?",
+to:"Chet opens Chayyim (חַיִּים) — life itself. Life is always the tension of two forces held in sacred enclosure."},
+
+{h:"ט",n:"Tet",t:"Tet · Yod · Tav",m:"טֵית",v:9,g:"Simple",el:"Leo",as:"Leo",
+ml:[{h:"ט",n:"Tet",d:"Serpent / vessel / hidden good"},{h:"י",n:"Yod",d:"Divine spark / the point"},{h:"ת",n:"Tav",d:"Seal / truth / completion"}],
+op:"Tet–Yod–Tav: Hidden good (Tet) holds the divine spark (Yod) until sealed in truth (Tav). The transformation operator is gestation — the serpent coils inward around the egg of potential. What looks like withholding may be ripening.",
+kb:"Tet's first appearance in Torah is tov (טוֹב) — good — from the first day of creation. Yet Tet is absent from the priestly blessing — its goodness is concealed, not broadcast. Nine is the final single digit, the month of gestation before birth.",
+ap:"What goodness in you is still coiled inward, not yet ready to emerge? Tet invites you not to force the uncoiling but to trust the gestation. What is ripening that you keep trying to release before its time?",
+rf:"What are you incubating that needs more darkness before it can be born into light?",
+to:"Tov (טוֹב) — good — appears seven times in the creation story. Tet's hidden goodness is woven through the very fabric of what was made."},
+
+{h:"י",n:"Yod",t:"Yod · Vav · Dalet",m:"יוֹד",v:10,g:"Simple",el:"Virgo",as:"Virgo",
+ml:[{h:"י",n:"Yod",d:"Divine spark / hand / the point"},{h:"ו",n:"Vav",d:"Hook / connector / and"},{h:"ד",n:"Dalet",d:"Door / receptivity / threshold"}],
+op:"Yod–Vav–Dalet: The divine spark (Yod) connects (Vav) through the threshold (Dalet). The transformation operator is incarnation through receptivity — the infinite point enters only through something empty enough to receive it.",
+kb:"Yod is the smallest letter yet contains every other — all Hebrew letters are drawn from Yod. It is the divine point, the first emanation from Ein Sof. Ten is the number of the Sefirot. The Ari taught the entire Torah is contained in the first verse, which is contained in the first word, which is contained in Yod.",
+ap:"Yod asks: where is the divine spark already present in this situation, waiting to be recognized? The practice of Yod is noticing. The smallest, most precise intervention is always more powerful than the largest general one.",
+rf:"What is the single point — the Yod — at the center of your work, your life, your offering?",
+to:"Yod begins YHVH — the divine Name. Every Hebrew letter contains a Yod in its structure."},
+
+{h:"כ",n:"Kaf",t:"Kaf · Peh",m:"כַּף",v:20,g:"Double",el:"Sun",as:"Sun",
+ml:[{h:"כ",n:"Kaf",d:"Palm / crown / vessel"},{h:"פ",n:"Peh",d:"Mouth / speech / creative word"}],
+op:"Kaf–Peh: The open palm (Kaf) speaks (Peh). The transformation operator is embodied generosity — to give with the hand and name with the mouth simultaneously. A blessing is spoken while the hands are raised.",
+kb:"Kaf is the open palm in receiving and giving mode. Twenty represents spiritual maturity. Kaf is associated with Keter (crown) — sovereignty expressed through open-handed generosity, not closed-fisted control.",
+ap:"How are you holding your hands right now — open or clenched? Your offering is a palm — it holds something and offers it forward. What exactly is in your palm? Can you name it and speak it (Peh)?",
+rf:"What blessing is your open palm holding that is waiting to be named and given?",
+to:"Kaf appears in kavod (כָּבוֹד) — glory, honor, weight. True glory is not accumulated but distributed through the open hand."},
+
+{h:"ל",n:"Lamed",t:"Lamed · Mem · Dalet",m:"לָמֶד",v:30,g:"Simple",el:"Libra",as:"Libra",
+ml:[{h:"ל",n:"Lamed",d:"Ox goad / learning / reaching heart"},{h:"מ",n:"Mem",d:"Water / depth / the flowing"},{h:"ד",n:"Dalet",d:"Door / threshold / receptivity"}],
+op:"Lamed–Mem–Dalet: The aspiring heart (Lamed) flows through water (Mem) to the threshold (Dalet). The transformation operator is learning as descent — wisdom doesn't arrive through grasping but through opening to the flow and arriving empty at the door.",
+kb:"Lamed is the tallest letter — it reaches into the sky. The Talmud calls it lev mevin da'at — the heart that understands knowledge. Thirty is the age of spiritual fullness — Levites began full temple service at thirty.",
+ap:"Are you approaching learning through the door — empty, humble, receptive — or pushing your existing knowledge into the space? When you teach, the water (Mem) flows through you toward the threshold where the student waits.",
+rf:"What would you need to release from what you already know in order to learn what comes next?",
+to:"Lamed appears in l'dor v'dor (לְדוֹר וָדוֹר) — from generation to generation. The aspiring heart's deepest work is to pass the learning forward."},
+
+{h:"מ",n:"Mem",t:"Mem · Mem",m:"מֵם",v:40,g:"Mother",el:"Water",as:"Primordial waters",
+ml:[{h:"מ",n:"Mem (open)",d:"Revealed water / the flowing"},{h:"ם",n:"Mem (final)",d:"Sealed water / the hidden mystery"}],
+op:"Open Mem–Final Mem: revealed water and hidden water — the same element, different face. The transformation operator is continuity across revelation and concealment. What flows openly and what is sealed in mystery are both Mem.",
+kb:"Mem is the mother letter of water. The three mothers (Aleph-Mem-Shin) divide the universe: air, water, fire. Forty is the number of transformation: forty years in the desert, forty days on Sinai, forty weeks of gestation. Mem is the womb, the mikvah, the primordial waters before creation.",
+ap:"Where does the hidden water need to remain hidden — and where is the moment arriving for the sealed Mem to open? Not everything needs to be expressed yet. Some of your deepest material is still in the womb.",
+rf:"What is gestating in the depths of you that is not yet ready to surface — and can you trust that timing?",
+to:"Mem opens mayim (מַיִם) — waters — the second word of Torah's cosmic declaration. The waters were there before light."},
+
+{h:"נ",n:"Nun",t:"Nun · Vav · Nun",m:"נוּן",v:50,g:"Simple",el:"Scorpio",as:"Scorpio",
+ml:[{h:"נ",n:"Nun (bent)",d:"Faithful soul / the fish"},{h:"ו",n:"Vav",d:"Connection / the thread"},{h:"נ",n:"Nun (final)",d:"Extended faithfulness / the deep"}],
+op:"Nun–Vav–Nun: The faithful soul (bent Nun) connected (Vav) to its own extended depth (final Nun). The transformation operator is faithful continuity through depth — the same fish in shallow water and in the abyss, connected by an unbroken thread.",
+kb:"Fifty is the number of the Jubilee year — radical liberation. The 50th gate of understanding (Binah) is the threshold Moses approached but never entered. Nun is associated with faithfulness, n'shamah (soul), and ne'emanut.",
+ap:"Can you remain faithful to your deepest nature even when no one can see where you are swimming? What falling (nefila) in you is actually the precondition for the rising that follows?",
+rf:"What faithfulness is being asked of you in a place where no one will see or measure it?",
+to:"Nun appears in n'shamah (נְשָׁמָה) — soul. The fish and the soul share the same letter: both move through invisible depths."},
+
+{h:"ס",n:"Samech",t:"Samech · Mem · Khaf",m:"סָמֶך",v:60,g:"Simple",el:"Sagittarius",as:"Sagittarius",
+ml:[{h:"ס",n:"Samech",d:"Support / pillar / closed circle"},{h:"מ",n:"Mem",d:"Water / the hidden / depth"},{h:"ך",n:"Khaf (final)",d:"Extended palm / reaching below"}],
+op:"Samech–Mem–Khaf: The infinite support (Samech) flows through hidden depths (Mem) to the extended reach (final Khaf). The transformation operator is grounded transcendence — you are held by what flows beneath you, even where you cannot see.",
+kb:"Samech is the closed circle — no beginning, no end, perfect support. It appears in s'michah (סְמִיכָה) — the laying of hands in ordination, the transfer of support between generations. Samech is what makes the world continue when it should collapse.",
+ap:"Do you actually trust that you are held? Not theoretically — operationally. Are you making decisions as someone who is supported, or as someone who must generate all support themselves?",
+rf:"What would you do differently tomorrow if you truly knew you were held by an unbreakable support?",
+to:"Samech appears in somaich (סוֹמֵךְ) — the Lord supports all who fall. The closed circle is not a trap but a promise."},
+
+{h:"ע",n:"Ayin",t:"Ayin · Yod · Nun",m:"עַיִן",v:70,g:"Simple",el:"Capricorn",as:"Capricorn",
+ml:[{h:"ע",n:"Ayin",d:"Eye / spring / source that sees"},{h:"י",n:"Yod",d:"Divine spark / point / hand"},{h:"נ",n:"Nun",d:"Fish / faithfulness / the depths"}],
+op:"Ayin–Yod–Nun: The seeing-source (Ayin) beholds the divine spark (Yod) with faithful depth (Nun). The transformation operator is clear witnessing — to see not with the judging eye but with the spring-eye that watches the divine spark moving faithfully through the depths.",
+kb:"Seventy is the number of nations, of elders, of the Sanhedrin. Ayin is the silent letter of seeing — it makes no sound yet governs all perception. Eden (עֵדֶן) begins with Ayin: paradise is the place of pure seeing.",
+ap:"What are you seeing and what are you refusing to see? The spring aspect of Ayin points to the knowing that wells up from below — intuition, body wisdom. In your framework work: every diagnostic question is an Ayin practice.",
+rf:"What are you seeing clearly right now that you haven't yet been willing to say out loud?",
+to:"Ayin appears in eved (עֶבֶד) — servant — and in olam (עוֹלָם) — world/eternity. To serve the world is to see it clearly without flinching."},
+
+{h:"פ",n:"Peh",t:"Peh · Heh",m:"פֵּה",v:80,g:"Double",el:"Mercury",as:"Mercury",
+ml:[{h:"פ",n:"Peh",d:"Mouth / speech / the word that creates"},{h:"ה",n:"Heh",d:"Window / breath / divine presence"}],
+op:"Peh–Heh: The creative word (Peh) breathes divine presence (Heh). The transformation operator is conscious speech as world-building — every word is a window through which divine breath moves. What you say becomes the house you inhabit.",
+kb:"Peh is the power of speech — Torah was given at Sinai peh el peh, mouth to mouth. Eighty is the age Moses was when he stood before Pharaoh — the full maturity of the speaking self. The world was created through ten utterances (ma'amarot).",
+ap:"Map the language you use about yourself, your work, your future. Are these words building the house you want to live in? Let divine breath move through your words, not just your will.",
+rf:"What declaration — spoken out loud, not just thought — would change the architecture of your life?",
+to:"Peh appears in vayomer Elohim (וַיֹּאמֶר אֱלֹהִים) — and God said. Ten times God speaks in the creation account."},
+
+{h:"צ",n:"Tzadi",t:"Tzadi · Dalet · Yod",m:"צָדִי",v:90,g:"Simple",el:"Aquarius",as:"Aquarius",
+ml:[{h:"צ",n:"Tzadi",d:"Fishhook / righteous / bent in service"},{h:"ד",n:"Dalet",d:"Door / threshold / humble receptivity"},{h:"י",n:"Yod",d:"Divine spark / the hand / point"}],
+op:"Tzadi–Dalet–Yod: The righteous one (Tzadi) bends at the threshold (Dalet) to reveal the divine spark (Yod). The transformation operator is descending righteousness — the tzaddik doesn't ascend above the world but bends toward it.",
+kb:"Tzadi is the letter of the tzaddik — the righteous one who draws others upward by descending to meet them. Ninety is the age Sarah was when she conceived Isaac — impossible birth, the fruit of patient righteousness.",
+ap:"Where are you being called to bend? Not to break — but to angle yourself toward another's need. The most powerful offering descends into where people actually are, not where you wish they were.",
+rf:"Where does your service need to become more humble, more embodied, more willing to go low?",
+to:"Tzadi opens tzaddik (צַדִּיק) and tzedakah (צְדָקָה) — righteousness and charity. Both are the same movement: bending toward another with what you carry."},
+
+{h:"ק",n:"Qof",t:"Qof · Vav · Peh",m:"קוֹף",v:100,g:"Simple",el:"Pisces",as:"Pisces",
+ml:[{h:"ק",n:"Qof",d:"Back of head / the leap / threshold"},{h:"ו",n:"Vav",d:"Hook / connection / the and"},{h:"פ",n:"Peh",d:"Mouth / speech / the declaring word"}],
+op:"Qof–Vav–Peh: The leap across the threshold (Qof) connects (Vav) to the declaring word (Peh). The transformation operator is faithful speech at the edge of the unknown — you leap and while in the air, you connect and name what you cannot yet see below.",
+kb:"Qof's form descends below the baseline — it reaches into the realm below the natural order. Qof is the threshold between kedushah (holiness) and klipah. One hundred is the number of blessings the Talmud requires each day — one hundred crossings from ordinary to sacred.",
+ap:"What leap are you postponing because you cannot see where you will land? Name what you believe is possible for the people you serve, even before you can demonstrate it. Your faithful words build the bridge you're crossing.",
+rf:"What would you declare out loud if you were willing to leap before you could see the ground?",
+to:"Qof opens kadosh (קָדוֹשׁ) — holy. And kol (קוֹל) — voice. The holy is reached by the voice that leaps."},
+
+{h:"ר",n:"Resh",t:"Resh · Yod · Shin",m:"רֵישׁ",v:200,g:"Double",el:"Venus",as:"Sun/Venus",
+ml:[{h:"ר",n:"Resh",d:"Head / beginning / the first face"},{h:"י",n:"Yod",d:"Divine spark / the hand / point"},{h:"שׁ",n:"Shin",d:"Fire / transformation / the divine flame"}],
+op:"Resh–Yod–Shin: The head (Resh) holds the divine spark (Yod) which becomes fire (Shin). The transformation operator is leadership through illumination — the head receives the Yod and radiates it as transforming fire. True leadership is orientation, not authority.",
+kb:"Resh is the head, the beginning, the leader. Resh is associated with Ruach (רוּחַ) — spirit — and Rachamim (רַחֲמִים) — compassion. Spiritual leadership is always a matter of bringing the highest perception into form.",
+ap:"In what area are you being called to be the head — to set the direction, to hold the Yod, to let it ignite into Shin? Name the Resh of your offering — the singular vision that everything else serves.",
+rf:"What is the one vision — the Resh — that you are here to hold and point toward?",
+to:"Resh lives inside Bereshit (בְּרֵאשִׁית) — the head of creation is embedded in the very beginning."},
+
+{h:"שׁ",n:"Shin",t:"Shin · Yod · Nun",m:"שִׁין",v:300,g:"Mother",el:"Fire",as:"Primordial fire",
+ml:[{h:"שׁ",n:"Shin",d:"Tooth / fire / the divine flame"},{h:"י",n:"Yod",d:"Divine spark / hand / point"},{h:"נ",n:"Nun",d:"Fish / faithfulness / the depths"}],
+op:"Shin–Yod–Nun: Divine fire (Shin) carries the spark (Yod) into faithful depth (Nun). The transformation operator is purifying fire in service of faithful continuity — the flame clarifies. What cannot survive the fire was never real. What remains after Shin's burning is the Yod.",
+kb:"Shin is the mother letter of fire. Three flames rise from its three prongs: the three pillars, the three patriarchs, body-soul-spirit. Shin opens Shekhinah, Shabbat, Shalom, and Shema. In El Shaddai, Shin is the letter on the mezuzah — fire at the threshold.",
+ap:"What needs to be burned? Not destroyed — transformed. What belief or structure has outlived its truth and needs Shin's fire to clarify it? After every Shin, a Yod remains. Trust the fire.",
+rf:"What in your current work or life is ready to be transformed by fire — and what is the purified Yod that will remain?",
+to:"Shin opens Shema (שְׁמַע) — Hear O Israel. The fire of Shin calls us to listen."},
+
+{h:"ת",n:"Tav",t:"Tav · Vav",m:"תָּו",v:400,g:"Double",el:"Moon/Saturn",as:"Saturn/Moon",
+ml:[{h:"ת",n:"Tav",d:"Mark / seal / truth / completion"},{h:"ו",n:"Vav",d:"Hook / connector / the and"}],
+op:"Tav–Vav: The seal of completion (Tav) connects (Vav) to what comes next. The transformation operator is completion as beginning — every ending is a Vav connecting to what follows. The seal is not a period but a semicolon.",
+kb:"Tav is the last letter — the completion of divine speech. Its form is a mark — in Ezekiel's vision, the Tav is placed on the foreheads of the righteous. Tav is the letter of covenant: you have been seen, named, counted as real.",
+ap:"What is genuinely complete in your life right now? Before beginning the next creation, Tav invites you to seal the last one — acknowledge it, name it, mark it as real. When you honor what is finished, you are already beginning.",
+rf:"What is complete in you right now that is waiting for your acknowledgment before the next beginning can truly start?",
+to:"Tav closes Emet (אֱמֶת) — truth. Aleph (beginning) + Mem (middle) + Tav (end): truth is the whole alphabet lived from first to last, leaving nothing out."},
+
+{h:"כ",n:"Kaf Sofit",t:"Final Kaf · Peh",m:"כַּף סוֹפִית",v:500,g:"Final",el:"Sun (extended)",as:"Soul depth",
+ml:[{h:"כ",n:"Kaf",d:"Palm / crown / vessel"},{h:"פ",n:"Peh",d:"Mouth / speech / the word"}],
+op:"Final Kaf carries Kaf–Peh into the depths — the giving hand descends below the baseline when a word ends. The transformation operator is deepened generosity: what you offer at the end of something goes deeper than what you offer at the beginning.",
+kb:"The five final letters correspond to the five levels of the soul. Final Kaf represents the Nefesh ha-Nefesh — the soul of the soul, the deepest layer of personal identity. Ultimate sovereignty is expressed in the willingness to reach below — to serve what cannot be seen.",
+ap:"Every completed project carries Final Kaf energy — the residue of your giving that goes beyond what was named. When you bring something to its conclusion, what are you offering into the unseen?",
+rf:"As this chapter of your work closes, what is the gift your open palm is releasing into the depths?",
+to:"Final Kaf appears in barech (בָּרֵךְ) — to bless. The blessing that descends below the visible is the deepest blessing."},
+
+{h:"ם",n:"Mem Sofit",t:"Final Mem — sealed",m:"מֵם סוֹפִית",v:600,g:"Final",el:"Water (sealed)",as:"Hidden waters",
+ml:[{h:"מ",n:"Mem (open)",d:"Revealed water / the flowing"},{h:"ם",n:"Mem (final)",d:"Sealed water / the hidden mystery"}],
+op:"Open Mem to Final Mem: revelation to concealment — the same water, different face. The transformation operator is the mystery that does not need to be opened. Final Mem's perfectly closed form is not withholding — it is completion in sacred sealing.",
+kb:"Final Mem appears only at the end of words. The Zohar teaches the world to come is hinted at by Final Mem: a completely enclosed space where divine light fills every corner. One Talmudic exception: Isaiah 9:6 writes Final Mem in the middle of a word — teaching that the messianic increase of peace opens even the sealed mystery.",
+ap:"Not everything you understand must be shared. Some of the most sacred transmission happens in the silence between the teaching and the question. Honor your Final Mem material — it is not less valuable for being sealed.",
+rf:"What mystery are you carrying that is complete as it is — that needs no explaining, no sharing, just honoring?",
+to:"Final Mem closes mayim (מַיִם) — waters. The waters that opened creation are sealed at the end of the word."},
+
+{h:"ן",n:"Nun Sofit",t:"Final Nun — extended faithfulness",m:"נוּן סוֹפִית",v:700,g:"Final",el:"Scorpio (extended)",as:"Deep waters",
+ml:[{h:"נ",n:"Nun (bent)",d:"Faithful soul / shallow water"},{h:"ו",n:"Vav",d:"Connection / the thread"},{h:"ן",n:"Nun (final)",d:"Fish in the deep / absolute faithfulness"}],
+op:"Bent Nun–Vav–Final Nun: the faithful soul connects to its own extended depth. Final Nun is the same fish swimming in absolute darkness — no floor, no light, no landmark. The transformation operator is faithfulness without evidence.",
+kb:"Final Nun reaches the deepest of all final letters. Seven hundred represents the ultimate expansion of the seven-cycle: the Jubilee of Jubilees. Final Nun is associated with the hidden tzaddik — the one whose faithfulness is so complete it requires no witness.",
+ap:"What commitment are you willing to maintain without external validation, in the dark, below where anyone is watching? There are phases of creation that live in Final Nun — where the vision is real but invisible. This is not failure. This is the fish trusting the current.",
+rf:"Where are you in the deep water right now — and can you name what current you are trusting, even without proof?",
+to:"Final Nun closes ne'eman (נֶאֱמָן) — faithful. The faithful one's last letter descends into what cannot be seen. That is the definition of faith."},
+
+{h:"ף",n:"Peh Sofit",t:"Final Peh — the word below words",m:"פֵּה סוֹפִית",v:800,g:"Final",el:"Mercury (extended)",as:"The unspoken",
+ml:[{h:"פ",n:"Peh",d:"Mouth / speech / the creating word"},{h:"ה",n:"Heh",d:"Window / breath / divine presence"}],
+op:"Final Peh carries Peh–Heh into the depths — the word breathes presence into what is below language. The transformation operator is the prayer after prayer ends: the utterance that descends below the threshold of speech into pure transmission.",
+kb:"Final Peh appears in aleph (אָלֶף) — the first letter's own Milui contains Final Peh — suggesting the whole journey of the alphabet arrives at a word that descends below language. Silence (Aleph) and the word below words (Final Peh) are one.",
+ap:"What are you communicating that exists beyond your words? The most powerful thing you transmit may not be in your content but in what radiates from your genuine presence — your aliveness, your conviction, the quality of your attention.",
+rf:"What truth about you and your work lives below your language — that people sense before you speak?",
+to:"Final Peh closes aleph (אָלֶף) — the first letter. The silent one ends in the word below words."},
+
+{h:"ץ",n:"Tzadi Sofit",t:"Final Tzadi — complete righteousness",m:"צָדִי סוֹפִית",v:900,g:"Final",el:"Aquarius (extended)",as:"The completed arc",
+ml:[{h:"צ",n:"Tzadi",d:"Fishhook / righteous / bent in service"},{h:"ד",n:"Dalet",d:"Threshold / humble door / receptivity"},{h:"י",n:"Yod",d:"Divine spark / hand / the point"}],
+op:"Final Tzadi carries Tzadi–Dalet–Yod into the deepest descent. The transformation operator is complete embodied service — righteousness that reaches into every depth, bends at every threshold, draws up the divine spark from the lowest possible place.",
+kb:"Nine hundred represents the completion of the righteous arc before the new cycle begins. Final Tzadi is associated with the tzaddik whose service is complete — who has bent to every threshold, descended to every depth, and returned carrying the Yod.",
+ap:"Have you gone all the way down? The work that reaches Final Tzadi does not leave anyone behind. It descends to meet people exactly where they are, however low, and draws the Yod forth.",
+rf:"What would complete righteousness look like in your specific work — not perfection, but the full arc of your service lived all the way down to the last hidden spark?",
+to:"Final Tzadi closes eretz (אֶרֶץ) — earth, land. The righteous one's full descent is into the earth itself — the most humble, the most real."}
+];
+
+const GROUPS=["All","Mother","Double","Simple","Final"];
+let grp="All",sel=null;
+
+function filtered(){return grp==="All"?LL:LL.filter(l=>l.g===grp)}
+
+function render(){
+  const root=document.getElementById("root");
+  if(sel!==null){
+    const l=LL[sel];
+    const mlH=l.ml.map(m=>`<div class="mltr"><div class="mlheb">${m.h}</div><div class="mlname">${m.n}</div><div class="mlmean">${m.d}</div></div>`).join("");
+    root.innerHTML=`
+      <button class="back" onclick="go(null)">← all letters</button>
+      <div class="dhero">
+        <div class="dheb">${l.h}</div>
+        <div class="dname">${l.n}</div>
+        <div class="dtrans">${l.t}</div>
+        <div class="badges">
+          <span class="bdg hi">${l.g}</span>
+          <span class="bdg">${l.el}</span>
+          <span class="bdg">${l.as}</span>
+          <span class="bdg">Value: ${l.v}</span>
+        </div>
+      </div>
+      <div class="secs">
+        <div class="sec">
+          <div class="slbl">Milui — the inner spelling</div>
+          <div class="mheb">${l.m}</div>
+          <div class="mbreak">${mlH}</div>
+        </div>
+        <div class="sec">
+          <div class="slbl">Transformation operators</div>
+          <div class="opblk"><div class="oplbl">What the spelling is doing</div><div class="txt">${l.op}</div></div>
+        </div>
+        <div class="sec">
+          <div class="slbl">Kabbalistic associations</div>
+          <div class="txt">${l.kb}</div>
+        </div>
+        <div class="sec">
+          <div class="slbl">How to apply it</div>
+          <div class="apblk"><div class="aplbl">In your life and work</div><div class="txt">${l.ap}</div></div>
+        </div>
+        <div class="sec">
+          <div class="slbl">In Torah</div>
+          <div class="txt">${l.to}</div>
+          <div class="ref">${l.rf}</div>
+        </div>
+      </div>
+      <div class="foot"><p>The Hebrew Letters · Free Explorer</p></div>`;
+  } else {
+    const vis=filtered();
+    const fH=GROUPS.map(g=>`<button class="ftag${g===grp?" on":""}" onclick="setG('${g}')">${g}</button>`).join("");
+    const gH=vis.map(l=>{const i=LL.indexOf(l);return`<div class="lcard" onclick="go(${i})"><div class="lc">${l.h}</div><div class="ln">${l.n}</div><div class="lv">${l.v}</div></div>`}).join("");
+    root.innerHTML=`
+      <div class="hdr">
+        <div class="hdr-title">The Hebrew Letters</div>
+        <div class="hdr-heb">אותיות עבריות</div>
+        <div class="hdr-sub">22 Letters · 5 Final Forms · Free Explorer</div>
+        <div class="hdr-intro">Each letter is a transformation operator — a living force that shapes reality. Tap any letter to explore its Milui, Kabbalistic depth, and how to apply it.</div>
+      </div>
+      <div class="filters">${fH}</div>
+      <div class="grid">${gH}</div>
+      <div class="foot"><p>Tap any letter to begin · Filter by group above</p></div>`;
+  }
+}
+
+function go(i){sel=i;render();window.scrollTo(0,0);}
+function setG(g){grp=g;sel=null;render();}
+
+render();
+</script>
+</body>
+</html>
