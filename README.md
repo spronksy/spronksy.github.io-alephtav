@@ -11,20 +11,20 @@ Aleph Tav makes this knowledge freely accessible to anyone. It covers all 22 let
 
 What each letter includes:
 
-The letter and its name — Hebrew character, transliteration, numerical value
+The letter and its name - Hebrew character, transliteration, numerical value
 
-Group and elemental association — Mother, Double, or Simple letter; elemental and astrological correspondence
+Group and elemental association - Mother, Double, or Simple letter; elemental and astrological correspondence
 
 Milui — the inner spelling of the letter's name, broken into its component letters, each with its own meaning
-Transformation operators — what the Milui sequence is actually doing as a movement of energy; the specific arc from one state to another that the spelling encodes
+Transformation operators - what the Milui sequence is actually doing as a movement of energy; the specific arc from one state to another that the spelling encodes
 
-Kabbalistic associations — connections to the Sefirot, to Torah, to Zoharic and Talmudic teaching, to number symbolism and cosmology
+Kabbalistic associations - connections to the Sefirot, to Torah, to Zoharic and Talmudic teaching, to number symbolism and cosmology
 
-How to apply it — practical guidance for working with the letter's energy in your life, work, relationships, and creative process
+How to apply it - practical guidance for working with the letter's energy in your life, work, relationships, and creative process
 
-In Torah — the letter's first or most significant appearance in the sacred text
+In Torah - the letter's first or most significant appearance in the sacred text
 
-Reflection question — a single question to sit with
+Reflection question - a single question to sit with
 
 
 The Name:
@@ -48,7 +48,7 @@ How to use it:
 
 Open index.html in any browser, desktop or mobile. No installation, no account, no dependencies beyond an internet connection for font loading.
 
-Live at: spronksy.github.io/alephtav
+Live at: <https://spronksy.github.io/alephtav/>
 
 Filter letters by group (Mother, Double, Simple, Final) or browse all 27. Tap any letter to open its full detail view. Use the reflection questions as entry points for journaling, meditation, or conversation.
 
